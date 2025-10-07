@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Graduation cap -->
-  <path d="M16 8L4 12l12 4 12-4-12-4z" fill="#1e293b"/>
-  <path d="M6 14v6c0 2 4.5 4 10 4s10-2 10-4v-6" fill="none" stroke="#1e293b" stroke-width="2"/>
-  <rect x="8" y="10" width="16" height="3" fill="#0f172a"/>
-  <!-- Tassel -->
-  <line x1="24" y1="12" x2="26" y2="18" stroke="#fbbf24" stroke-width="2"/>
-  <circle cx="26" cy="19" r="1.5" fill="#fbbf24"/>
-</svg>
