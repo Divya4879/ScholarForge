@@ -1,0 +1,27 @@
+/* Global styles for ScholarForge */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0D1129;
+  color: #E2E8F0;
+  margin: 0;
+}
+
+.prose-custom {
+  color: #E2E8F0;
+}
+
+.prose-custom h1, .prose-custom h2, .prose-custom h3, .prose-custom h4, .prose-custom h5, .prose-custom h6 {
+  color: #F43F94;
+}
+
+.prose-custom strong {
+  color: white;
+}
+
+.prose-custom p, .prose-custom ul, .prose-custom ol {
+  line-height: 1.75;
+}
