@@ -5,7 +5,8 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { UserProfile, ResearchTopic, ReferenceResult, Reference, SourceVettingInfo, ResourceResult, ChatMessage, OutlineSection } from '../types';
 
 // FIX: Initialize Gemini AI client per guidelines.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = process.env.VITE_GEMINI_API_KEY || process.env.API_KEY || process.env.GEMINI_API_KEY;
+const ai = new GoogleGenAI({ apiKey });
 
 export const generateTopics = async (profile: UserProfile): Promise<ResearchTopic[]> => {
   const prompt = `
