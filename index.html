@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScholarForge</title>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          },
+          colors: {
+            'primary-dark': '#0D1129',
+            'primary-light': '#1A2049',
+            'accent-pink': '#F43F94',
+            'accent-pink-soft': '#FF80D5',
+            'accent-cyan': '#22D3EE',
+            'content-light': '#E2E8F0',
+            'content-medium': '#94A3B8',
+            'content-dark': '#475569',
+          },
+          backgroundImage: {
+            'gradient-main': 'radial-gradient(circle at 20% 20%, rgba(26, 32, 73, 0.5), #0D1129 40%)',
+          },
+          animation: {
+            'subtle-pulse': 'subtle-pulse 6s infinite ease-in-out',
+          },
+          keyframes: {
+            'subtle-pulse': {
+              '0%, 100%': { opacity: '0.1' },
+              '50%': { opacity: '0.25' },
+            }
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0D1129;
+      color: #E2E8F0;
+      margin: 0;
+    }
+    .prose-custom {
+      color: #E2E8F0;
+    }
+    .prose-custom h1, .prose-custom h2, .prose-custom h3, .prose-custom h4, .prose-custom h5, .prose-custom h6 {
+      color: #F43F94;
+    }
+    .prose-custom strong {
+      color: white;
+    }
+     .prose-custom p, .prose-custom ul, .prose-custom ol {
+      line-height: 1.75;
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://aistudiocdn.com/react@^19.2.0",
+      "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+      "react/": "https://aistudiocdn.com/react@^19.2.0/",
+      "@google/genai": "https://aistudiocdn.com/@google/genai@^1.22.0",
+      "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0"
+    }
+  }
+  </script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-primary-dark">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
