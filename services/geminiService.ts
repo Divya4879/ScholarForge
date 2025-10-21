@@ -299,6 +299,112 @@ export const analyzeDraftSection = async (sectionContent: string, sectionTitle: 
     return response.text;
 };
 
+export const generateChapterContent = async (
+    section: OutlineSection, 
+    topic: ResearchTopic, 
+    profile: UserProfile,
+    existingContent?: string
+): Promise<string> => {
+    const prompt = `
+        Generate comprehensive academic content for a ${profile.academicLevel}-level research paper section.
+        
+        Research Topic: "${topic.title}"
+        Topic Description: "${topic.description}"
+        Section Title: "${section.title}"
+        Section Description: "${section.description}"
+        Academic Level: ${profile.academicLevel}
+        Field of Study: ${profile.stream}
+        
+        ${existingContent ? `Existing Content to Build Upon:\n${existingContent}\n\n` : ''}
+        
+        Generate detailed academic content that includes:
+        1. Well-structured paragraphs with clear topic sentences
+        2. Academic language appropriate for ${profile.academicLevel} level
+        3. Logical flow and transitions between ideas
+        4. Placeholder citations in format [Author, Year] where appropriate
+        5. Subsection headings if the section is complex
+        
+        The content should be substantial (300-800 words) and ready for academic submission.
+        Format the response in markdown with proper headings and structure.
+        
+        Do not include generic placeholders - write specific, detailed content relevant to the topic.
+    `;
+    
+    const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: prompt,
+    });
+    
+    return response.text;
+};
+
+export const generateSubsectionContent = async (
+    subsection: { title: string; description: string },
+    parentSection: OutlineSection,
+    topic: ResearchTopic,
+    profile: UserProfile
+): Promise<string> => {
+    const prompt = `
+        Generate detailed content for a specific subsection of a research paper.
+        
+        Research Topic: "${topic.title}"
+        Main Section: "${parentSection.title}"
+        Subsection: "${subsection.title}"
+        Subsection Focus: "${subsection.description}"
+        Academic Level: ${profile.academicLevel}
+        
+        Generate 2-4 well-developed paragraphs that:
+        1. Address the specific focus of this subsection
+        2. Use academic language and structure
+        3. Include relevant examples or explanations
+        4. Add placeholder citations [Author, Year] where needed
+        5. Connect to the broader section and research topic
+        
+        Format in markdown. Be specific and detailed, not generic.
+    `;
+    
+    const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: prompt,
+    });
+    
+    return response.text;
+};
+
+export const enhanceExistingContent = async (
+    currentContent: string,
+    section: OutlineSection,
+    topic: ResearchTopic,
+    enhancementType: 'expand' | 'improve' | 'add_citations' | 'restructure'
+): Promise<string> => {
+    const enhancementPrompts = {
+        expand: "Expand this content with more detailed explanations, examples, and academic depth.",
+        improve: "Improve the academic writing quality, clarity, and flow of this content.",
+        add_citations: "Add appropriate placeholder citations [Author, Year] throughout this content where academic sources would be needed.",
+        restructure: "Restructure this content with better organization, headings, and logical flow."
+    };
+    
+    const prompt = `
+        ${enhancementPrompts[enhancementType]}
+        
+        Research Topic: "${topic.title}"
+        Section: "${section.title}"
+        
+        Current Content:
+        ---
+        ${currentContent}
+        ---
+        
+        Return the enhanced version in markdown format. Maintain the academic tone and ensure the content remains relevant to the research topic.
+    `;
+    
+    const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: prompt,
+    });
+    
+    return response.text;
+};
 export const checkPlagiarism = async (text: string): Promise<any> => {
     console.log("Plagiarism check called for:", text.substring(0, 50) + "...");
     return Promise.resolve({
