@@ -12,11 +12,36 @@ interface DashboardProps {
 
 const Dashboard: React.FC<DashboardProps> = ({ project, onNavigate }) => {
   const totalSections = project.outline.length;
-  const completedSections = Object.values(project.progressivePaperData).filter(
-    (content: SectionContent) => content?.markdown && content.markdown.trim() !== '' && content.markdown.length > 200
+  
+  // More strict completion check - exclude default outline content
+  const completedSections = Object.entries(project.progressivePaperData).filter(
+    ([sectionTitle, content]: [string, SectionContent]) => {
+      if (!content?.markdown || content.markdown.trim() === '') return false;
+      
+      // Exclude sections that only have the default outline format
+      const defaultPattern = `## ${sectionTitle}\n\n`;
+      const isOnlyOutline = content.markdown.trim() === defaultPattern.trim() || 
+                           content.markdown.length < 300; // Require substantial content
+      
+      return !isOnlyOutline;
+    }
   ).length;
+  
   const progress = totalSections > 0 ? Math.round((completedSections / totalSections) * 100) : 0;
   const isFullyComplete = progress === 100;
+
+  // Debug log (remove after testing)
+  console.log('Progress Debug:', {
+    totalSections,
+    completedSections,
+    progress,
+    paperData: Object.keys(project.progressivePaperData),
+    contentLengths: Object.entries(project.progressivePaperData).map(([title, content]) => ({
+      title,
+      length: content?.markdown?.length || 0,
+      preview: content?.markdown?.substring(0, 50) + '...'
+    }))
+  });
 
   return (
     <div className="flex flex-col h-full gap-8">
