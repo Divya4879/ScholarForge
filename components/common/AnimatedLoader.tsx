@@ -1,23 +1,26 @@
 import React from 'react';
 
 const AnimatedLoader: React.FC<{ text?: string }> = ({ text = 'Analyzing...' }) => {
-  const starCount = 40;
+  const starCount = 60; // Increased for larger area
 
   return (
     <div className="flex flex-col items-center justify-center space-y-6 my-8 p-4 bg-transparent rounded-lg overflow-hidden w-full">
-      <div className="relative w-56 h-56 flex items-center justify-center">
+      <div className="relative flex items-center justify-center" style={{ width: '50vw', height: '50vh' }}>
         <style>
           {`
             .galaxy-image {
               position: absolute;
-              width: 90%;
-              height: 90%;
+              width: 40%;
+              height: 40%;
               border-radius: 50%;
               animation: spin 45s linear infinite;
               object-fit: cover;
               opacity: 0.85;
               filter: saturate(1.1);
               box-shadow: 0 0 25px 5px rgba(255, 128, 213, 0.1);
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
             }
 
             .sparkle-star {
@@ -29,8 +32,8 @@ const AnimatedLoader: React.FC<{ text?: string }> = ({ text = 'Analyzing...' }) 
             }
 
             @keyframes spin {
-              from { transform: rotate(0deg); }
-              to { transform: rotate(360deg); }
+              from { transform: translate(-50%, -50%) rotate(0deg); }
+              to { transform: translate(-50%, -50%) rotate(360deg); }
             }
 
             @keyframes twinkle-move {
@@ -53,25 +56,18 @@ const AnimatedLoader: React.FC<{ text?: string }> = ({ text = 'Analyzing...' }) 
           className="galaxy-image"
         />
         
-        {/* Starfield */}
+        {/* Starfield covering full 50vw x 50vh area */}
         {Array.from({ length: starCount }).map((_, i) => {
-          const size = Math.random() * 15 + 8;
+          const size = Math.random() * 12 + 6;
           const duration = Math.random() * 3 + 3;
           const delay = Math.random() * 3;
           
-          // Position stars in a ring outside the galaxy
-          const angle = Math.random() * 2 * Math.PI;
-          const radius = Math.random() * 120 + 90; // Increased radius to ensure they are around the galaxy
-          
-          const centerX = 50;
-          const centerY = 50;
-          const sizePercent = (size / 224) * 100;
+          // Distribute stars across the full area
+          const left = Math.random() * 100;
+          const top = Math.random() * 100;
 
-          const left = centerX + (radius / 2.2) * Math.cos(angle) - (sizePercent / 2);
-          const top = centerY + (radius / 2.2) * Math.sin(angle) - (sizePercent / 2);
-
-          const tx = (Math.random() - 0.5) * 30;
-          const ty = (Math.random() - 0.5) * 30;
+          const tx = (Math.random() - 0.5) * 40;
+          const ty = (Math.random() - 0.5) * 40;
 
           return (
             <div
