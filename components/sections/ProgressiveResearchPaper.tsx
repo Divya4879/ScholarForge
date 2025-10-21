@@ -5,6 +5,7 @@ import Card from '../common/Card';
 import Button from '../common/Button';
 import { SaveIcon } from '../icons/Icons';
 import DraftHelper from './DraftHelper';
+import ChapterGenerator from './ChapterGenerator';
 
 interface ProgressiveResearchPaperProps {
   project: Project;
@@ -15,6 +16,7 @@ const ProgressiveResearchPaper: React.FC<ProgressiveResearchPaperProps> = ({ pro
   const [activeSection, setActiveSection] = useState<OutlineSection | null>(project.outline[0] || null);
   const [currentMarkdown, setCurrentMarkdown] = useState<string>('');
   const [isSaving, setIsSaving] = useState(false);
+  const [showGenerator, setShowGenerator] = useState(false);
 
   useEffect(() => {
     if (activeSection) {
@@ -40,6 +42,24 @@ const ProgressiveResearchPaper: React.FC<ProgressiveResearchPaperProps> = ({ pro
     onUpdateProject({ progressivePaperData: updatedPaperData });
     
     setTimeout(() => setIsSaving(false), 1000); // Simulate save time
+  };
+
+  const handleContentGenerated = (generatedContent: string) => {
+    setCurrentMarkdown(generatedContent);
+    // Auto-save the generated content
+    if (activeSection) {
+      const updatedSectionData: SectionContent = {
+        ...(project.progressivePaperData[activeSection.title] || { citations: [] }),
+        markdown: generatedContent
+      };
+
+      const updatedPaperData = {
+        ...project.progressivePaperData,
+        [activeSection.title]: updatedSectionData
+      };
+      
+      onUpdateProject({ progressivePaperData: updatedPaperData });
+    }
   };
 
   if (project.outline.length === 0) {
@@ -78,7 +98,7 @@ const ProgressiveResearchPaper: React.FC<ProgressiveResearchPaperProps> = ({ pro
         </Card>
       </div>
 
-      {/* Main editor and draft helper */}
+      {/* Main editor and AI tools */}
       <div className="lg:w-2/3 flex flex-col gap-8">
         <Card title={activeSection?.title || 'Select a Section'} className="flex-grow flex flex-col">
           <div className="flex-grow flex flex-col">
@@ -89,19 +109,37 @@ const ProgressiveResearchPaper: React.FC<ProgressiveResearchPaperProps> = ({ pro
               placeholder={`Start writing the "${activeSection?.title}" section here...`}
             />
           </div>
-           <div className="mt-6 text-right">
-              <Button onClick={handleSave} leftIcon={<SaveIcon />} disabled={isSaving}>
-                {isSaving ? 'Saving...' : 'Save Section'}
-              </Button>
-            </div>
+          <div className="mt-6 flex justify-between items-center">
+            <Button 
+              onClick={() => setShowGenerator(!showGenerator)} 
+              variant="secondary"
+            >
+              {showGenerator ? 'Hide AI Generator' : 'Show AI Generator'}
+            </Button>
+            <Button onClick={handleSave} leftIcon={<SaveIcon />} disabled={isSaving}>
+              {isSaving ? 'Saving...' : 'Save Section'}
+            </Button>
+          </div>
         </Card>
         
+        {/* AI Chapter Generator */}
+        {showGenerator && activeSection && project.topic && project.userProfile && (
+          <ChapterGenerator
+            section={activeSection}
+            topic={project.topic}
+            profile={project.userProfile}
+            currentContent={currentMarkdown}
+            onContentGenerated={handleContentGenerated}
+          />
+        )}
+        
+        {/* Draft Helper */}
         {activeSection && project.topic && (
-            <DraftHelper 
-                sectionContent={currentMarkdown}
-                sectionTitle={activeSection.title}
-                projectTopic={project.topic}
-            />
+          <DraftHelper 
+            sectionContent={currentMarkdown}
+            sectionTitle={activeSection.title}
+            projectTopic={project.topic}
+          />
         )}
       </div>
     </div>
