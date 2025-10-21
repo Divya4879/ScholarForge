@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AnimatedLoader: React.FC<{ text?: string }> = ({ text = 'Analyzing...' }) => {
-  const starCount = 60; // Increased for larger area
+  const starCount = 120; // Doubled from 60
 
   return (
     <div className="flex flex-col items-center justify-center space-y-6 my-8 p-4 bg-transparent rounded-lg overflow-hidden w-full">
