@@ -9,48 +9,52 @@
 </div>
 
 <div align="center">
-  <h3>🚀 Your AI Partner in Academic Research</h3>
+  <h3>🚀 Your 24*7 Partner in Academic Research</h3>
   <p><em>Transform your research journey from overwhelming to organized with intelligent AI guidance</em></p>
   
   <a href="https://scholarforge.netlify.app/" target="_blank">
     <img src="https://img.shields.io/badge/🌐_Live_Demo-Try_Now-success?style=for-the-badge" alt="Live Demo" />
   </a>
+
+  <img width="1920" height="4375" alt="screencapture-scholarforge-netlify-app-2025-10-21-15_19_34" src="https://github.com/user-attachments/assets/e236caf4-c35f-4da9-8598-8226a93c1644" />
+
+
 </div>
 
 ---
 
 ## 🌟 What is ScholarForge?
 
-ScholarForge is an **AI-powered research assistant** designed specifically for students undertaking significant academic projects. Whether you're working on a Bachelor's thesis or Master's dissertation, ScholarForge guides you through every step of the research process—from initial topic brainstorming to final paper refinement.
+ScholarForge is an **AI-powered research assistant** designed specifically for students undertaking significant academic projects. Whether you're working on a Bachelor's thesis or Master's dissertation, ScholarForge guides you through every step of the research process, from initial topic brainstorming to final paper refinement.
 
-### 🎯 **The Problem We Solve**
-- **60% of research time** is wasted on figuring out where to start
-- Students struggle with **topic selection** and **paper structure**
-- **Writer's block** and lack of guidance slow progress
-- **Reference hunting** consumes valuable research time
+### 🎯 **The Problem It Solves**
+- **40% of research time** is wasted on figuring out where to start.
+- Students struggle with **topic selection** and **paper structure**.
+- **Writer's block** and lack of guidance significantly slow progress.
+- **Reference hunting** consumes valuable research time.
 
-### 💡 **Our Solution**
-ScholarForge provides a **complete research ecosystem** that transforms chaos into structure, offering personalized AI guidance at every stage of your academic journey.
+### 💡 **The Solution**
+ScholarForge provides a **complete research ecosystem** that transforms chaos into structure, offering personalized AI guidance at every stage of your writing journey.
 
 ---
 
 ## ✨ Core Features
 
 ### 🧠 **Intelligent Topic Discovery**
-- **Personalized Suggestions**: AI generates 3-5 innovative research topics based on your academic profile
-- **Academic Level Matching**: Tailored for Bachelor's and Master's students
-- **Topic Validation**: Guided questions to ensure feasibility and scope
-- **Refinement Support**: Iterative improvement of your research focus
+- **Personalized Suggestions**: AI generates 6-10 innovative research topics based on your academic profile as well as your interests.
+- **Academic Level Matching**: Tailored for Bachelor's and Master's students.
+- **Topic Validation**: Guided questions to ensure feasibility and scope.
+- **Refinement Support**: Iterative improvement of your research focus.
 
 ### 📋 **Smart Research Planning**
-- **Automated Outline Generation**: Transform topics into comprehensive, chapter-by-chapter structures
-- **Detailed Subsections**: Each chapter includes specific subsections with descriptions
-- **Customizable Structure**: Modify and adapt outlines to your needs
-- **Academic Standards**: Follows established research paper conventions
+- **Automated Outline Generation**: Transform topics into comprehensive, chapter-by-chapter structures.
+- **Detailed Subsections**: Each chapter includes specific subsections with descriptions.
+- **Customizable Structure**: Modify and adapt outlines to your needs.
+- **Academic Standards**: Follows established research paper conventions.
 
 ### ✍️ **Progressive Writing Assistant**
-- **Section-by-Section Guidance**: Break down overwhelming papers into manageable chunks
-- **AI Draft Analysis**: Expert-level feedback on structure, methodology, and writing quality
+- **Section-by-Section Guidance**: Break down overwhelming papers into manageable chunks.
+- **AI Draft Analysis**: Expert-level feedback on structure, methodology, and writing quality.
 - **Multiple Analysis Types**: 
   - 🏗️ Structural Analysis
   - 🔬 Methodology Critique  
@@ -61,16 +65,16 @@ ScholarForge provides a **complete research ecosystem** that transforms chaos in
 ### 🔍 **Research Support Tools**
 
 #### **Reference Finder**
-- **AI-Powered Search**: Leverages Google Search with intelligent categorization
-- **Source Categories**: Research papers, articles/news, courses/resources
-- **Credibility Vetting**: Automated assessment of source reliability
-- **Direct Links**: Access to academic databases and repositories
+- **AI-Powered Search**: Leverages Google Search with intelligent categorization.
+- **Source Categories**: Research papers, articles/news, courses/resources.
+- **Credibility Vetting**: Automated assessment of source reliability.
+- **Direct Links**: Access to academic databases and repositories.
 
 #### **Guidance Coach**
-- **Context-Aware Assistance**: Understands your specific research topic
-- **Personalized Advice**: Tailored guidance based on your project
-- **Writer's Block Solutions**: Practical strategies to overcome obstacles
-- **Motivational Support**: Encouraging feedback to maintain momentum
+- **Context-Aware Assistance**: Understands your specific research topic.
+- **Personalized Advice**: Tailored guidance based on your project.
+- **Writer's Block Solutions**: Practical strategies to overcome obstacles.
+- **Motivational Support**: Encouraging feedback to maintain momentum.
 
 #### **Resource Hub**
 - **Technical Resources**: Datasets, code repositories, tools & libraries
@@ -78,28 +82,27 @@ ScholarForge provides a **complete research ecosystem** that transforms chaos in
 - **Direct Access**: Links to GitHub, academic databases, and research platforms
 
 ### 📊 **Progress Tracking & Management**
-- **Visual Progress Indicators**: Track completion across all sections
-- **Project Dashboard**: Centralized view of your research status
-- **Milestone Tracking**: Monitor key research phases
-- **Export Capabilities**: Generate PDF versions of your work
+- **Visual Progress Indicators**: Track completion across all sections.
+- **Project Dashboard**: Centralized view of your research status.
+- **Milestone Tracking**: Monitor key research phases.
+- **Export Capabilities**: Generate PDF versions of your work.
 
 ---
 
 ## 🎯 Who Is This For?
 
 ### **Primary Users**
-- 🎓 **Bachelor's Students** working on thesis projects
-- 📚 **Master's Students** conducting research dissertations
-- 📖 **Graduate Researchers** seeking structured guidance
-- ✍️ **Academic Writers** needing AI-powered assistance
+- 🎓 **Bachelor's Students** working on thesis projects.
+- 📚 **Master's Students** conducting research dissertations.
+- 📖 **Graduate Researchers** seeking structured guidance.
 
 ### **Perfect For Students Who**
-- Feel overwhelmed by the research process
-- Struggle with topic selection and validation
-- Need help structuring their papers
-- Want expert-level feedback on their writing
-- Require assistance finding credible sources
-- Seek motivation and guidance throughout their journey
+- Feel overwhelmed by the research process.
+- Struggle with topic selection and validation.
+- Need help structuring their papers.
+- Want expert-level feedback on their writing.
+- Require assistance finding credible sources.
+- Seek motivation and guidance throughout their writing journey.
 
 ---
 
@@ -141,14 +144,14 @@ Netlify               → Deployment & hosting
 ## 🚀 Quick Start
 
 ### **Option 1: Try the Live Demo**
-Visit **[scholarforge.netlify.app](https://scholarforge.netlify.app/)** to start immediately—no setup required!
+Visit **[ScholarForge](https://scholarforge.netlify.app)** to start immediately, no setup required!
 
 ### **Option 2: Local Development**
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/scholarforge.git
-cd scholarforge
+git clone https://github.com/Divya4879/ScholarForge.git
+cd ScholarForge
 
 # Install dependencies
 npm install
@@ -176,8 +179,8 @@ npm run dev
 
 1. **Clone & Install**
    ```bash
-   git clone https://github.com/yourusername/scholarforge.git
-   cd scholarforge
+   git clone https://github.com/Divya4879/ScholarForge.git
+   cd ScholarForge
    npm install
    ```
 
@@ -187,7 +190,7 @@ npm run dev
    ```
 
 3. **Get Your Gemini API Key**
-   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Visit [Google AI Studio](https://aistudio.google.com/app/api-keys)
    - Sign in with your Google account
    - Click "Create API Key"
    - Copy the generated key
@@ -216,7 +219,7 @@ npm run preview
 ### **Step-by-Step Workflow**
 
 ```mermaid
-graph LR
+graph TB
     A[Landing Page] --> B[Profile Setup]
     B --> C[Topic Generation]
     C --> D[Topic Validation]
@@ -311,7 +314,8 @@ We welcome contributions from the academic and developer communities!
 
 1. **Fork the Repository**
    ```bash
-   git fork https://github.com/yourusername/scholarforge.git
+   git fork https://github.com/Divya4879/ScholarForge.git
+   cd ScholarForge
    ```
 
 2. **Create Feature Branch**
@@ -381,7 +385,6 @@ We welcome contributions from the academic and developer communities!
 ### **Planned Features**
 - 📊 **Advanced Analytics**: Detailed writing insights
 - 🤝 **Collaboration Tools**: Multi-user project support
-- 📱 **Mobile App**: Native iOS/Android applications
 - 🌐 **Cloud Sync**: Cross-device synchronization
 - 🎓 **Institution Integration**: LMS compatibility
 - 📈 **Citation Management**: Automated bibliography
@@ -400,37 +403,9 @@ We welcome contributions from the academic and developer communities!
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
-```
-MIT License
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
-
 ---
 
-## 📞 Support & Community
-
-### **Get Help**
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/yourusername/scholarforge/issues)
-- 💬 **Feature Requests**: [GitHub Discussions](https://github.com/yourusername/scholarforge/discussions)
-- 📧 **Direct Contact**: scholarforge@example.com
-- 📖 **Documentation**: [Project Wiki](https://github.com/yourusername/scholarforge/wiki)
-
-### **Community**
-- ⭐ **Star this repository** if ScholarForge helps your research
-- 🍴 **Fork and contribute** to make it even better
-- 📢 **Share with fellow students** and researchers
-- 💬 **Join discussions** about academic AI tools
-
-### **Acknowledgments**
+## **Acknowledgments**
 - 🙏 **Google Gemini AI** for powerful language capabilities
 - 🎨 **Tailwind CSS** for beautiful, responsive design
 - ⚡ **Vite & React** for modern development experience
@@ -440,7 +415,7 @@ copies or substantial portions of the Software.
 
 <div align="center">
   <h3>🎓 Empowering Academic Excellence Through AI</h3>
-  <p><em>Built with ❤️ for students, by students who understand the research struggle</em></p>
+  <p><em>Built with ❤️ for students, by a student who understands your research struggle</em></p>
   
   <a href="https://scholarforge.netlify.app/">
     <img src="https://img.shields.io/badge/Start_Your_Research_Journey-Try_ScholarForge_Now-success?style=for-the-badge" alt="Try ScholarForge" />
