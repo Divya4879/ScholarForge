@@ -18,12 +18,12 @@ const Dashboard: React.FC<DashboardProps> = ({ project, onNavigate }) => {
     ([sectionTitle, content]: [string, SectionContent]) => {
       if (!content?.markdown || content.markdown.trim() === '') return false;
       
-      // Exclude sections that only have the default outline format
-      const defaultPattern = `## ${sectionTitle}\n\n`;
-      const isOnlyOutline = content.markdown.trim() === defaultPattern.trim() || 
-                           content.markdown.length < 300; // Require substantial content
+      // Check if content is just the default outline format
+      const lines = content.markdown.trim().split('\n');
+      const hasSubstantialContent = content.markdown.length > 1000 || // Require 1000+ chars OR
+                                   lines.length > 10; // More than 10 lines (indicating real content)
       
-      return !isOnlyOutline;
+      return hasSubstantialContent;
     }
   ).length;
   
@@ -31,15 +31,15 @@ const Dashboard: React.FC<DashboardProps> = ({ project, onNavigate }) => {
   const isFullyComplete = progress === 100;
 
   // Debug log (remove after testing)
-  console.log('Progress Debug:', {
+  console.log('Progress Debug Fixed:', {
     totalSections,
     completedSections,
     progress,
-    paperData: Object.keys(project.progressivePaperData),
-    contentLengths: Object.entries(project.progressivePaperData).map(([title, content]) => ({
+    contentAnalysis: Object.entries(project.progressivePaperData).map(([title, content]) => ({
       title,
       length: content?.markdown?.length || 0,
-      preview: content?.markdown?.substring(0, 50) + '...'
+      lines: content?.markdown?.split('\n').length || 0,
+      isCompleted: content?.markdown && (content.markdown.length > 1000 || content.markdown.split('\n').length > 10)
     }))
   });
 
