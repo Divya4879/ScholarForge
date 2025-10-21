@@ -105,14 +105,14 @@ const ProgressiveResearchPaper: React.FC<ProgressiveResearchPaperProps> = ({ pro
             <textarea
               value={currentMarkdown}
               onChange={(e) => setCurrentMarkdown(e.target.value)}
-              className="w-full h-full flex-grow p-4 bg-primary-dark/80 rounded-lg border border-content-dark/50 focus:outline-none focus:ring-2 focus:ring-accent-cyan resize-none text-content-light"
+              className="w-full h-[75vh] p-4 bg-primary-dark/80 rounded-lg border border-content-dark/50 focus:outline-none focus:ring-2 focus:ring-accent-cyan resize-none text-content-light"
               placeholder={`Start writing the "${activeSection?.title}" section here...`}
             />
           </div>
           <div className="mt-6 flex justify-between items-center">
             <Button 
-              onClick={() => setShowGenerator(!showGenerator)} 
-              variant="secondary"
+              onClick={() => setShowGenerator(!showGenerator)}
+              className="bg-purple-600 hover:bg-purple-700 text-white"
             >
               {showGenerator ? 'Hide AI Generator' : 'Show AI Generator'}
             </Button>
