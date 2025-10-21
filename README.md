@@ -15,6 +15,10 @@
   <a href="https://scholarforge.netlify.app/" target="_blank">
     <img src="https://img.shields.io/badge/🌐_Live_Demo-Try_Now-success?style=for-the-badge" alt="Live Demo" />
   </a>
+
+  <img width="1920" height="4375" alt="screencapture-scholarforge-netlify-app-2025-10-21-15_19_34" src="https://github.com/user-attachments/assets/e236caf4-c35f-4da9-8598-8226a93c1644" />
+
+
 </div>
 
 ---
