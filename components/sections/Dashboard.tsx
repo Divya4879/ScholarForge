@@ -16,6 +16,7 @@ const Dashboard: React.FC<DashboardProps> = ({ project, onNavigate }) => {
     (content: SectionContent) => content?.markdown && content.markdown.trim() !== '' && content.markdown.length > 200
   ).length;
   const progress = totalSections > 0 ? Math.round((completedSections / totalSections) * 100) : 0;
+  const isFullyComplete = progress === 100;
 
   return (
     <div className="flex flex-col h-full gap-8">
@@ -24,6 +25,12 @@ const Dashboard: React.FC<DashboardProps> = ({ project, onNavigate }) => {
           Welcome back, {project.userProfile.name}!
         </h1>
         <p className="text-content-medium mt-3 text-lg">Let's continue shaping your research. Here's your project overview.</p>
+        {isFullyComplete && (
+          <div className="mt-4 p-3 bg-green-900/30 border border-green-500/50 rounded-lg">
+            <p className="text-green-400 font-semibold">🎉 Congratulations! Your research paper is complete!</p>
+            <p className="text-green-300 text-sm mt-1">All sections have been written and saved.</p>
+          </div>
+        )}
       </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 flex-grow">
@@ -76,8 +83,12 @@ const Dashboard: React.FC<DashboardProps> = ({ project, onNavigate }) => {
                             <span className="text-4xl font-bold text-white">{progress}%</span>
                         </div>
                     </div>
-                    <p className="text-lg mt-4 text-content-light">Complete</p>
-                    <p className="text-content-medium mt-1">{completedSections} of {totalSections} sections started</p>
+                    <p className="text-lg mt-4 text-content-light">
+                      {isFullyComplete ? 'Complete' : 'In Progress'}
+                    </p>
+                    <p className="text-content-medium mt-1">
+                      {completedSections} of {totalSections} sections {isFullyComplete ? 'completed' : 'written'}
+                    </p>
                 </div>
             </Card>
         </div>
