@@ -124,48 +124,63 @@ export const findReferences = async (topic: ResearchTopic): Promise<ReferenceRes
     Prioritize sources from well-known academic databases (like IEEE, ACM, Google Scholar, arXiv) for 'researchPapers'.
     `;
 
-    const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: prompt,
-        config: {
-            tools: [{ googleSearch: {} }],
-        },
-    });
+    try {
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: prompt,
+            config: {
+                tools: [{ googleSearch: {} }],
+            },
+        });
 
-    const groundingChunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
-    
-    const processPrompt = `
-        Based on the provided search results, please structure the information into the requested JSON format.
-        Search Results:
-        ${JSON.stringify(groundingChunks)}
+        const groundingChunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
+        
+        const processPrompt = `
+            Based on the provided search results, please structure the information into the requested JSON format.
+            Search Results:
+            ${JSON.stringify(groundingChunks)}
 
-        Required JSON structure:
-        {
-          "researchPapers": [{ "title": "...", "description": "...", "link": "..." }],
-          "articlesAndNews": [{ "title": "...", "description": "...", "link": "..." }],
-          "coursesAndResources": [{ "title": "...", "description": "...", "link": "..." }]
-        }
-        Create a description for each item. Ensure the links are valid URLs from the search results.
-    `;
-    
-    const structuredResponse = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: processPrompt,
-        config: {
-            responseMimeType: 'application/json',
-            responseSchema: {
-                type: Type.OBJECT,
-                properties: {
-                    researchPapers: { type: Type.ARRAY, items: { type: Type.OBJECT, properties: { title: { type: Type.STRING }, description: { type: Type.STRING }, link: { type: Type.STRING } }, required: ['title', 'description', 'link'] } },
-                    articlesAndNews: { type: Type.ARRAY, items: { type: Type.OBJECT, properties: { title: { type: Type.STRING }, description: { type: Type.STRING }, link: { type: Type.STRING } }, required: ['title', 'description', 'link'] } },
-                    coursesAndResources: { type: Type.ARRAY, items: { type: Type.OBJECT, properties: { title: { type: Type.STRING }, description: { type: Type.STRING }, link: { type: Type.STRING } }, required: ['title', 'description', 'link'] } },
+            Required JSON structure:
+            {
+              "researchPapers": [{ "title": "...", "description": "...", "link": "..." }],
+              "articlesAndNews": [{ "title": "...", "description": "...", "link": "..." }],
+              "coursesAndResources": [{ "title": "...", "description": "...", "link": "..." }]
+            }
+            Create a description for each item. Ensure the links are valid URLs from the search results.
+            Make sure all strings are properly escaped and the JSON is valid.
+        `;
+        
+        const structuredResponse = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: processPrompt,
+            config: {
+                responseMimeType: 'application/json',
+                responseSchema: {
+                    type: Type.OBJECT,
+                    properties: {
+                        researchPapers: { type: Type.ARRAY, items: { type: Type.OBJECT, properties: { title: { type: Type.STRING }, description: { type: Type.STRING }, link: { type: Type.STRING } }, required: ['title', 'description', 'link'] } },
+                        articlesAndNews: { type: Type.ARRAY, items: { type: Type.OBJECT, properties: { title: { type: Type.STRING }, description: { type: Type.STRING }, link: { type: Type.STRING } }, required: ['title', 'description', 'link'] } },
+                        coursesAndResources: { type: Type.ARRAY, items: { type: Type.OBJECT, properties: { title: { type: Type.STRING }, description: { type: Type.STRING }, link: { type: Type.STRING } }, required: ['title', 'description', 'link'] } },
+                    }
                 }
             }
-        }
-    });
+        });
 
-    const results = JSON.parse(structuredResponse.text);
-    return results || { researchPapers: [], articlesAndNews: [], coursesAndResources: [] };
+        let results;
+        try {
+            results = JSON.parse(structuredResponse.text);
+        } catch (parseError) {
+            console.error('JSON parse error:', parseError);
+            console.error('Raw response:', structuredResponse.text);
+            // Return fallback data
+            return { researchPapers: [], articlesAndNews: [], coursesAndResources: [] };
+        }
+
+        return results || { researchPapers: [], articlesAndNews: [], coursesAndResources: [] };
+    } catch (error) {
+        console.error('Error in findReferences:', error);
+        return { researchPapers: [], articlesAndNews: [], coursesAndResources: [] };
+    }
 };
 
 export const vetSource = async (ref: Reference): Promise<SourceVettingInfo> => {
