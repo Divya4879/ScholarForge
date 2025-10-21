@@ -5,7 +5,7 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { UserProfile, ResearchTopic, ReferenceResult, Reference, SourceVettingInfo, ResourceResult, ChatMessage, OutlineSection } from '../types';
 
 // FIX: Initialize Gemini AI client per guidelines.
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+const apiKey = (import.meta as any).env.VITE_GEMINI_API_KEY;
 const ai = new GoogleGenAI({ apiKey });
 
 export const generateTopics = async (profile: UserProfile): Promise<ResearchTopic[]> => {
@@ -42,8 +42,13 @@ export const generateTopics = async (profile: UserProfile): Promise<ResearchTopi
     }
   });
 
-  const topics = JSON.parse(response.text);
-  return topics || [];
+  try {
+    const topics = JSON.parse(response.text);
+    return topics || [];
+  } catch (error) {
+    console.error('Error parsing topics JSON:', error);
+    return [];
+  }
 };
 
 export const generateOutline = async (topic: ResearchTopic, profile: UserProfile): Promise<OutlineSection[]> => {
@@ -93,8 +98,13 @@ export const generateOutline = async (topic: ResearchTopic, profile: UserProfile
         }
     });
 
-    const outline = JSON.parse(response.text);
-    return outline || [];
+    try {
+        const outline = JSON.parse(response.text);
+        return outline || [];
+    } catch (error) {
+        console.error('Error parsing outline JSON:', error);
+        return [];
+    }
 };
 
 export const continueChat = async (history: ChatMessage[], prompt: string, context: { topic: ResearchTopic | null }): Promise<string> => {
@@ -232,8 +242,18 @@ export const vetSource = async (ref: Reference): Promise<SourceVettingInfo> => {
         },
     });
     
-    const info = JSON.parse(structuredResponse.text);
-    return info;
+    try {
+        const info = JSON.parse(structuredResponse.text);
+        return info;
+    } catch (error) {
+        console.error('Error parsing vetSource JSON:', error);
+        return {
+            peerReviewStatus: 'Unknown',
+            authorAffiliation: 'Unknown',
+            publicationRecency: 'Unknown',
+            credibilitySummary: 'Unable to analyze source credibility'
+        };
+    }
 };
 
 export const findRelevantResources = async (topic: ResearchTopic, profile: UserProfile): Promise<ResourceResult> => {
@@ -285,8 +305,13 @@ export const findRelevantResources = async (topic: ResearchTopic, profile: UserP
         }
     });
 
-    const results = JSON.parse(structuredResponse.text);
-    return results || { datasets: [], codeRepositories: [], toolsAndLibraries: [] };
+    try {
+        const results = JSON.parse(structuredResponse.text);
+        return results || { datasets: [], codeRepositories: [], toolsAndLibraries: [] };
+    } catch (error) {
+        console.error('Error parsing resources JSON:', error);
+        return { datasets: [], codeRepositories: [], toolsAndLibraries: [] };
+    }
 };
 
 export const analyzeDraftSection = async (sectionContent: string, sectionTitle: string, topic: ResearchTopic, analysisPrompt: string): Promise<string> => {
