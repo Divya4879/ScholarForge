@@ -256,6 +256,8 @@ const ChapterGenerator: React.FC<ChapterGeneratorProps> = ({
             </Button>
           </div>
         </div>
+      )}
+
       {/* Custom Instructions/Feedback */}
       {generationType === 'feedback' && (
         <div className="space-y-4">
