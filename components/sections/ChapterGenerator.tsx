@@ -21,8 +21,33 @@ const ChapterGenerator: React.FC<ChapterGeneratorProps> = ({
   onContentGenerated
 }) => {
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generationType, setGenerationType] = useState<'full' | 'subsection' | 'enhance'>('full');
+  const [generationType, setGenerationType] = useState<'full' | 'subsection' | 'enhance' | 'feedback'>('full');
   const [selectedSubsection, setSelectedSubsection] = useState<number>(0);
+  const [feedback, setFeedback] = useState<string>('');
+
+  const handleGenerateWithFeedback = async () => {
+    if (!feedback.trim()) {
+      alert('Please provide feedback or instructions for regeneration.');
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      const content = await geminiService.generateChapterContent(
+        section,
+        topic,
+        profile,
+        currentContent.trim() ? `${currentContent}\n\nUser Feedback: ${feedback}` : `User Instructions: ${feedback}`
+      );
+      onContentGenerated(content);
+      setFeedback(''); // Clear feedback after use
+    } catch (error) {
+      console.error('Error generating with feedback:', error);
+      alert('Failed to generate content with feedback. Please try again.');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   const handleGenerateFullChapter = async () => {
     setIsGenerating(true);
@@ -141,6 +166,16 @@ const ChapterGenerator: React.FC<ChapterGeneratorProps> = ({
         >
           Enhance Existing
         </button>
+        <button
+          onClick={() => setGenerationType('feedback')}
+          className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+            generationType === 'feedback'
+              ? 'bg-accent-pink text-white'
+              : 'bg-primary-dark/50 text-content-medium hover:text-content-light'
+          }`}
+        >
+          Custom Instructions
+        </button>
       </div>
 
       {/* Full Chapter Generation */}
@@ -220,6 +255,22 @@ const ChapterGenerator: React.FC<ChapterGeneratorProps> = ({
               Restructure
             </Button>
           </div>
+        </div>
+      {/* Custom Instructions/Feedback */}
+      {generationType === 'feedback' && (
+        <div className="space-y-4">
+          <p className="text-content-medium text-sm">
+            Provide specific feedback or instructions for how you want the content to be generated or improved.
+          </p>
+          <textarea
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+            placeholder="Example: Make it more technical, add more examples, focus on recent research, include specific methodologies, etc."
+            className="w-full h-24 p-3 bg-primary-dark/70 border border-content-dark/50 rounded-lg text-content-light resize-none focus:outline-none focus:ring-2 focus:ring-accent-cyan"
+          />
+          <Button onClick={handleGenerateWithFeedback} leftIcon={<SparklesIcon />}>
+            Generate with Instructions
+          </Button>
         </div>
       )}
     </div>

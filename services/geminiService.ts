@@ -305,7 +305,10 @@ export const generateChapterContent = async (
     profile: UserProfile,
     existingContent?: string
 ): Promise<string> => {
-    const prompt = `
+    // Check if existingContent contains user feedback/instructions
+    const hasFeedback = existingContent?.includes('User Feedback:') || existingContent?.includes('User Instructions:');
+    
+    let prompt = `
         Generate comprehensive academic content for a ${profile.academicLevel}-level research paper section.
         
         Research Topic: "${topic.title}"
@@ -315,7 +318,12 @@ export const generateChapterContent = async (
         Academic Level: ${profile.academicLevel}
         Field of Study: ${profile.stream}
         
-        ${existingContent ? `Existing Content to Build Upon:\n${existingContent}\n\n` : ''}
+        ${existingContent ? `
+        ${hasFeedback ? 'Previous Content and User Instructions:' : 'Existing Content to Build Upon:'}
+        ${existingContent}
+        
+        ${hasFeedback ? 'Please incorporate the user feedback and instructions above when generating the content.' : ''}
+        ` : ''}
         
         Generate detailed academic content that includes:
         1. Well-structured paragraphs with clear topic sentences
@@ -328,6 +336,7 @@ export const generateChapterContent = async (
         Format the response in markdown with proper headings and structure.
         
         Do not include generic placeholders - write specific, detailed content relevant to the topic.
+        ${hasFeedback ? 'Make sure to address all the user feedback and instructions provided.' : ''}
     `;
     
     const response = await ai.models.generateContent({
